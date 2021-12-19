@@ -2,7 +2,7 @@ const express = require('express')
 const app = express()
 const port = 31291
 
-const sendEmail = require('./services/sendEmail')
+// const sendEmail = require('./services/sendEmail')
 const routes = require('./routes')
 
 app.use(express.json())
