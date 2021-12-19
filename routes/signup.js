@@ -45,7 +45,6 @@ const service = (req, res) => {
   const token = encrypt(Math.round(Math.random() * 10000) + " " + new Date()) + "_" + encrypt(Math.round(Math.random() * 10000) + " " + new Date())
   addUser(email, hash, token)
   
-  res.cookie('something', 'some value')
   res.json({
     sts: 0,
     msg: 'signup successful'

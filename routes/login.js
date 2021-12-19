@@ -41,11 +41,14 @@ const service = async (req, res) => {
     })
     return
   }
+
+
+  const { token } = userData
   
-  res.cookie('something', 'some value')
+  res.cookie('login_auth_token', token)
   res.json({
     sts: 0,
-    msg: 'login'
+    msg: 'logged in successfully'
   })
 }
 
