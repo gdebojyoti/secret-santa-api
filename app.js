@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 8080
+const port = process.env.PORT || 8080
 
 // const sendEmail = require('./services/sendEmail')
 const routes = require('./routes')
@@ -27,5 +27,5 @@ routes.forEach(({ method, path, service }) => {
 })
 
 app.listen(port, () => {
-  // console.log(`App listening at http://localhost:${port}`)
+  console.log(`Secret Santa API app is listening at http://localhost:${port}`)
 })
