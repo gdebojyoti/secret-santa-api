@@ -44,7 +44,8 @@ const service = (req, res) => {
   addUser(email, encrypt(password))
   
   res.json({
-    sts: 0
+    sts: 0,
+    msg: 'signup successful'
   })
 }
 
