@@ -17,14 +17,27 @@ module.exports = {
   //   })
   // },
 
-  addUser: (email, password) => {
+  addUser: (email, password, token) => {
     client.connect(async err => {
       const db = client.db(config.mongo_db_name)
       const result = await db.collection("users").insertOne({
-        email, password
+        email, password, token
       })
       console.log("firstDoc", result.insertedId)
       client.close()
     })
   },
+
+  loginUser: async (email, password) => {
+    return new Promise((resolve, reject) => {
+      client.connect(async err => {
+        const db = client.db(config.mongo_db_name)
+        const result = await db.collection("users").findOne({
+          email, password
+        })
+        client.close()
+        resolve(result)
+      })
+    })
+  }
 }
