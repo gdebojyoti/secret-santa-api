@@ -41,8 +41,11 @@ const service = (req, res) => {
   // TODO: check for existing email IDs
 
   // add data to database
-  addUser(email, encrypt(password))
+  const hash = encrypt(password)
+  const token = encrypt(Math.round(Math.random() * 10000) + " " + new Date()) + "_" + encrypt(Math.round(Math.random() * 10000) + " " + new Date())
+  addUser(email, hash, token)
   
+  res.cookie('something', 'some value')
   res.json({
     sts: 0,
     msg: 'signup successful'
