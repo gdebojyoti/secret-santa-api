@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const port = 31291
+const port = 80
 
 // const sendEmail = require('./services/sendEmail')
 const routes = require('./routes')
