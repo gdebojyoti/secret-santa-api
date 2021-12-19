@@ -1,7 +1,9 @@
+const { addUser } = require('../services/databaseOperations')
+const encrypt = require('../services/encrypt')
+
 const service = (req, res) => {
   // parse email & password from request
   // console.log(req.query)
-  console.log(req.body)
   const { email, password } = req.body || {}
 
   /* field validations */
@@ -36,7 +38,11 @@ const service = (req, res) => {
     return
   }
 
+  // TODO: check for existing email IDs
 
+  // add data to database
+  addUser(email, encrypt(password))
+  
   res.json({
     sts: 0
   })
