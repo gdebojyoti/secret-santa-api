@@ -1,5 +1,6 @@
 const { loginUser } = require('../services/databaseOperations')
 const encrypt = require('../services/encrypt')
+const parseCookies = require('../services/parseCookies')
 
 const service = async (req, res) => {
   // parse email & password from request
@@ -44,6 +45,8 @@ const service = async (req, res) => {
 
 
   const { token } = userData
+
+  console.log("req.headers.cookie", parseCookies(req.headers.cookie))
   
   res.cookie('login_auth_token', token)
   res.json({
