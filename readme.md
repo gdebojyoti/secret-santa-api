@@ -1,27 +1,27 @@
 ## API
 
-signup ~ send verification email
+- [x] signup ~ send verification email
 - send: email, name, password
 - receive: status
 
-verify-user
+- [ ] verify-user
 - send: code
 - receive: status
 
-login
+- [x] login
 - send: username, password
 - receive: status, token
 
-get-projects
+- [ ] get-projects
 - GET
 - send: token
 - receive: [projects]
 
-create-new-event
+- [x] create-new-event
 - send: token, name, [users]
 - receive: status, event-id
 
-trigger-event
+- [ ] trigger-event
 - send: token, event-id
 - receive: status
 
