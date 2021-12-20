@@ -39,5 +39,21 @@ module.exports = {
         resolve(result)
       })
     })
+  },
+
+  showUsers: async (email, password) => {
+    return new Promise((resolve, reject) => {
+      const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+      client.connect(async err => {
+        try {
+          const db = client.db(process.env.mongo_db_name)
+          const result = await db.collection("users").findOne()
+          client.close()
+          resolve(result)
+        } catch (e) {
+          reject (e)
+        }
+      })
+    })
   }
 }

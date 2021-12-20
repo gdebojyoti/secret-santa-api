@@ -1,3 +1,4 @@
+const showUsers = require('./showUsers')
 const signup = require('./signup')
 const verifyUser = require('./verifyUser')
 const login = require('./login')
@@ -6,6 +7,11 @@ const createNewEvent = require('./createNewEvent')
 const triggerEvent = require('./triggerEvent')
 
 const routes = [
+  {
+    method: 'GET',
+    path: '/show-users',
+    service: showUsers
+  },
   {
     method: 'POST',
     path: '/signup',
