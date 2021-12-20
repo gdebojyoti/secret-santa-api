@@ -7,15 +7,17 @@ const port = process.env.PORT || 31291
 
 // const sendEmail = require('./services/sendEmail')
 const routes = require('./routes')
+const { ALLOWED_ORIGINS } = require('./config')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.use(cors({
-  "origin": "*",
+  "origin": ALLOWED_ORIGINS || [],
   "methods": "GET,HEAD,POST",
   "preflightContinue": false,
-  "optionsSuccessStatus": 204
+  "optionsSuccessStatus": 204,
+  credentials: true
 }))
 
 app.get('/', (req,res) => {
