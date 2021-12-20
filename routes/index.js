@@ -3,7 +3,7 @@ const signup = require('./signup')
 const verifyUser = require('./verifyUser')
 const login = require('./login')
 const getProjects = require('./getProjects')
-const createNewEvent = require('./createNewEvent')
+const createEvent = require('./createEvent')
 const triggerEvent = require('./triggerEvent')
 
 const routes = [
@@ -35,7 +35,7 @@ const routes = [
   {
     method: 'POST',
     path: '/create-event',
-    service: createNewEvent
+    service: createEvent
   },
   {
     method: 'POST',
