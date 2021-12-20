@@ -21,7 +21,7 @@
 - send: token, name, [users]
 - receive: status, event-id
 
-- [ ] trigger-event
+- [x] trigger-event
 - send: token, event-id
 - receive: status
 
