@@ -1,7 +1,21 @@
-const { getEvents } = require('../services/databaseOperations')
+const { getEventDetails } = require('../services/databaseOperations')
 const parseCookies = require('../services/parseCookies')
 
 const service = async (req, res) => {
+  // parse email & password from request
+  const { id } = req.query || {}
+
+  /* field validations */
+
+  // check for missing fields
+  if (!id || typeof id !== 'string') {
+    res.json({
+      status: 1,
+      message: 'missing event id'
+    })
+    return
+  }
+
   // user should be logged in
   const { login_auth_token } = parseCookies(req.headers.cookie)
   if (!login_auth_token) {
@@ -14,7 +28,7 @@ const service = async (req, res) => {
   }
 
   // add data to database
-  const result = await getEvents(login_auth_token)
+  const result = await getEventDetails(login_auth_token, id)
 
   if (result === 1) {
     res.json({
@@ -24,11 +38,21 @@ const service = async (req, res) => {
     })
     return
   }
+  if (result === 2) {
+    res.json({
+      status: 1,
+      message: 'event not found',
+      code: 404
+    })
+    return
+  }
+
+  const { _id, ...rest } = result
 
   res.json({
     status: 0,
     data: {
-      events: !result ? [] : result.map(({ _id, ...rest }) => ({...rest}))
+      ...rest
     }
   })
 }

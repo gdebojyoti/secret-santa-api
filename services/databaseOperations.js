@@ -101,6 +101,38 @@ module.exports = {
     })
   },
   
+  getEventDetails: async (token, id) => {
+    return new Promise((resolve, reject) => {
+      client.connect(async err => {
+        try {
+          const db = client.db(process.env.mongo_db_name)
+          const user = await db.collection("users").findOne({ token })
+          
+          // if no user is found for provided auth token
+          if (!user) {
+            client.close()
+            resolve(1)
+          }
+
+          const { email } = user
+
+          // insert new entry into events collection
+          const details = await db.collection("events").findOne({ creator: email, id })
+
+          if (!details) {
+            client.close()
+            resolve(2)
+          }
+
+          client.close()
+          resolve(details)
+        } catch (e) {
+          reject (e)
+        }
+      })
+    })
+  },
+  
   triggerEvent: async (token, id) => {
     return new Promise((resolve, reject) => {
       client.connect(async err => {

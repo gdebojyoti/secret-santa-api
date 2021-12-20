@@ -3,7 +3,6 @@ const encrypt = require('../services/encrypt')
 
 const service = (req, res) => {
   // parse email & password from request
-  // console.log(req.query)
   const { email, password } = req.body || {}
 
   /* field validations */

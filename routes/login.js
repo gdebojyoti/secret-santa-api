@@ -43,11 +43,8 @@ const service = async (req, res) => {
     return
   }
 
-
   const { token } = userData
 
-  console.log("req.headers.cookie", parseCookies(req.headers.cookie))
-  
   res.cookie('login_auth_token', token)
   res.json({
     status: 0,

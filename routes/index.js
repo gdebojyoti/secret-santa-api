@@ -3,6 +3,7 @@ const signup = require('./signup')
 const verifyUser = require('./verifyUser')
 const login = require('./login')
 const getEvents = require('./getEvents')
+const getEventDetails = require('./getEventDetails')
 const createEvent = require('./createEvent')
 const triggerEvent = require('./triggerEvent')
 
@@ -31,6 +32,11 @@ const routes = [
     method: 'GET',
     path: '/get-events',
     service: getEvents
+  },
+  {
+    method: 'GET',
+    path: '/get-event-details',
+    service: getEventDetails
   },
   {
     method: 'POST',
