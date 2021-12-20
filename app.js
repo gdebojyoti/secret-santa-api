@@ -14,6 +14,8 @@ app.get('/', (req,res) => {
   res.json({ msg: 'I got in!' })
 })
 
+console.log("mongo_db_name", process.env.mongo_db_name)
+
 // app.get('/send-mail', (req,res) => {
 //   sendEmail(res.send)
 //   res.send('mail sent')
