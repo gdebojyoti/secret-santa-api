@@ -42,7 +42,11 @@ const service = (req, res) => {
   // add data to database
   const hash = encrypt(password)
   const token = encrypt(Math.round(Math.random() * 10000) + " " + new Date()) + "_" + encrypt(Math.round(Math.random() * 10000) + " " + new Date())
+  // TODO: handle db ops failure; catch error
   addUser(email, hash, token)
+
+  // add login_auth_token cookie after successful login
+  res.cookie('login_auth_token', token)
   
   res.json({
     status: 0,
