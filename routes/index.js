@@ -2,7 +2,7 @@ const showUsers = require('./showUsers')
 const signup = require('./signup')
 const verifyUser = require('./verifyUser')
 const login = require('./login')
-const getProjects = require('./getProjects')
+const getEvents = require('./getEvents')
 const createEvent = require('./createEvent')
 const triggerEvent = require('./triggerEvent')
 
@@ -29,8 +29,8 @@ const routes = [
   },
   {
     method: 'GET',
-    path: '/get-projects',
-    service: getProjects
+    path: '/get-events',
+    service: getEvents
   },
   {
     method: 'POST',

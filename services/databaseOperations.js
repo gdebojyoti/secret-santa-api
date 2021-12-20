@@ -76,6 +76,33 @@ module.exports = {
       })
     })
   },
+  
+  getEvents: async (token) => {
+    return new Promise((resolve, reject) => {
+      client.connect(async err => {
+        try {
+          const db = client.db(process.env.mongo_db_name)
+          const user = await db.collection("users").findOne({ token })
+          
+          // if no user is found for provided auth token
+          if (!user) {
+            client.close()
+            resolve(1)
+          }
+
+          const { email } = user
+
+          // insert new entry into events collection
+          const events = await db.collection("events").find({ creator: email }).toArray()
+
+          client.close()
+          resolve(events)
+        } catch (e) {
+          reject (e)
+        }
+      })
+    })
+  },
 
   showUsers: async (email, password) => {
     return new Promise((resolve, reject) => {
