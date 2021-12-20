@@ -1,7 +1,6 @@
 const sgMail = require('@sendgrid/mail')
-const config = require('../config')
 
-sgMail.setApiKey(config.sendgrid_api_key)
+sgMail.setApiKey(process.env.sendgrid_api_key)
 
 const msg = {
   to: 'gdebojyoti.mail@gmail.com', // Change to your recipient
