@@ -1,5 +1,6 @@
 const { triggerEvent } = require('../services/databaseOperations')
 const parseCookies = require('../services/parseCookies')
+const triggerSantaEmails = require('../services/triggerSantaEmails')
 
 const service = async (req, res) => {
   // parse title & users from request
@@ -62,7 +63,8 @@ const service = async (req, res) => {
     return
   }
 
-  console.log("result", result)
+  console.log("event data", result)
+  triggerSantaEmails(result)
 
   res.json({
     status: 0,

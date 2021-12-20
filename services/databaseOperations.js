@@ -89,7 +89,7 @@ module.exports = {
 
           const { email } = user
 
-          // insert new entry into events collection
+          // get all events for user (email)
           const events = await db.collection("events").find({ creator: email }).toArray()
 
           client.close()
@@ -116,7 +116,7 @@ module.exports = {
 
           const { email } = user
 
-          // insert new entry into events collection
+          // get event details
           const details = await db.collection("events").findOne({ creator: email, id })
 
           if (!details) {
@@ -148,7 +148,15 @@ module.exports = {
 
           const { email } = user
 
-          // insert new entry into events collection
+          // get event details
+          const details = await db.collection("events").findOne({ creator: email, id })
+
+          if (!details) {
+            client.close()
+            resolve(2)
+          }
+
+          // update event
           const result = await db.collection("events")
             .updateOne(
               { creator: email, id },
@@ -156,19 +164,22 @@ module.exports = {
             )
 
           if (!result) {
+            client.close()
             resolve(2)
           }
 
           const { matchedCount, modifiedCount } = result || {}
           if (!matchedCount) {
+            client.close()
             resolve(2)
           }
           if (!modifiedCount) {
+            client.close()
             resolve(3)
           }
 
           client.close()
-          resolve(result)
+          resolve(details)
         } catch (e) {
           reject (e)
         }
