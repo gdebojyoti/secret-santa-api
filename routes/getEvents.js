@@ -1,5 +1,4 @@
 const { getEvents } = require('../services/databaseOperations')
-const encrypt = require('../services/encrypt')
 const parseCookies = require('../services/parseCookies')
 
 const service = async (req, res) => {
