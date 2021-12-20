@@ -29,14 +29,17 @@ module.exports = {
 
   loginUser: async (email, password) => {
     return new Promise((resolve, reject) => {
-      const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true })
       client.connect(async err => {
-        const db = client.db(process.env.mongo_db_name)
-        const result = await db.collection("users").findOne({
-          email, password
-        })
-        client.close()
-        resolve(result)
+        try {
+          const db = client.db(process.env.mongo_db_name)
+          const result = await db.collection("users").findOne({
+            email, password
+          })
+          client.close()
+          resolve(result)
+        } catch (e) {
+          reject (e)
+        }
       })
     })
   },
