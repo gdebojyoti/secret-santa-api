@@ -12,10 +12,10 @@
 - send: username, password
 - receive: status, token
 
-- [ ] get-projects
+- [x] get-events
 - GET
 - send: token
-- receive: [projects]
+- receive: [events]
 
 - [x] create-new-event
 - send: token, name, [users]
@@ -29,10 +29,10 @@
 email: String
 isEmailVerified: Boolean
 name: String
-projects: [Project]
+events: [Event]
 
 
-Project
+Event
 name: String
 createdOn: Timestamp
 status: Integer
