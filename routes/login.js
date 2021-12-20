@@ -11,8 +11,8 @@ const service = async (req, res) => {
   // check for missing fields
   if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
     res.json({
-      sts: 1,
-      msg: 'missing email id or password'
+      status: 1,
+      message: 'missing email id or password'
     })
     return
   }
@@ -23,8 +23,8 @@ const service = async (req, res) => {
   )
   if (!match) {
     res.json({
-      sts: 1,
-      msg: 'invalid email id'
+      status: 1,
+      message: 'invalid email id'
     })
     return
   }
@@ -37,8 +37,8 @@ const service = async (req, res) => {
 
   if (!userData) {
     res.json({
-      sts: 1,
-      msg: 'incorrect email / password combination'
+      status: 1,
+      message: 'incorrect email / password combination'
     })
     return
   }
@@ -50,8 +50,8 @@ const service = async (req, res) => {
   
   res.cookie('login_auth_token', token)
   res.json({
-    sts: 0,
-    msg: 'logged in successfully'
+    status: 0,
+    message: 'logged in successfully'
   })
 }
 

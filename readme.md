@@ -1,4 +1,4 @@
-##~~ API ~~
+## API
 
 signup ~ send verification email
 - send: email, name, password

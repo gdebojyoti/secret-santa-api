@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 app.get('/', (req,res) => {
-  res.json({ msg: 'I got in!' })
+  res.json({ message: 'I got in!' })
 })
 
 // app.get('/send-mail', (req,res) => {

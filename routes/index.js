@@ -34,7 +34,7 @@ const routes = [
   },
   {
     method: 'POST',
-    path: '/create-new-event',
+    path: '/create-event',
     service: createNewEvent
   },
   {

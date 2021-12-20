@@ -7,8 +7,8 @@ const service = async (req, res) => {
 
     if (!userData) {
       res.json({
-        sts: 1,
-        msg: 'no users found'
+        status: 1,
+        message: 'no users found'
       })
       return
     }
@@ -16,14 +16,14 @@ const service = async (req, res) => {
     const { email } = userData
 
     res.json({
-      sts: 0,
-      msg: 'retrieved successfully',
+      status: 0,
+      message: 'retrieved successfully',
       data: { email }
     })
   } catch (e) {
     res.json({
-      sts: 1,
-      msg: 'some error occurred',
+      status: 1,
+      message: 'some error occurred',
       stack: e.toString()
     })
   }

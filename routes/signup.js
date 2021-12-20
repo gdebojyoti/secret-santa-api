@@ -11,8 +11,8 @@ const service = (req, res) => {
   // check for missing fields
   if (!email || !password || typeof email !== 'string' || typeof password !== 'string') {
     res.json({
-      sts: 1,
-      msg: 'missing email id or password'
+      status: 1,
+      message: 'missing email id or password'
     })
     return
   }
@@ -23,8 +23,8 @@ const service = (req, res) => {
   )
   if (!match) {
     res.json({
-      sts: 1,
-      msg: 'invalid email id'
+      status: 1,
+      message: 'invalid email id'
     })
     return
   }
@@ -32,8 +32,8 @@ const service = (req, res) => {
   // check for short passwords
   if (password.length < 4) {
     res.json({
-      sts: 1,
-      msg: 'password too short; need at least 4 characters'
+      status: 1,
+      message: 'password too short; need at least 4 characters'
     })
     return
   }
@@ -46,8 +46,8 @@ const service = (req, res) => {
   addUser(email, hash, token)
   
   res.json({
-    sts: 0,
-    msg: 'signup successful'
+    status: 0,
+    message: 'signup successful'
   })
 }
 
