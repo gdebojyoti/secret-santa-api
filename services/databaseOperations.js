@@ -44,7 +44,7 @@ module.exports = {
     })
   },
 
-  createEvent: async (token, eventId, name, users) => {
+  createEvent: async (token, details) => {
     return new Promise((resolve, reject) => {
       client.connect(async err => {
         try {
@@ -62,10 +62,7 @@ module.exports = {
           // insert new entry into events collection
           await db.collection("events").insertOne({
             creator: email,
-            id: eventId,
-            name,
-            users,
-            isEmailsTriggered: false
+            ...details
           })
 
           client.close()

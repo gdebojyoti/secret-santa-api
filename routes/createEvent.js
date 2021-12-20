@@ -59,7 +59,10 @@ const service = async (req, res) => {
 
   // add data to database
   const eventId = encrypt(new Date() + Math.round(Math.random * 1000))
-  const result = await createEvent(login_auth_token, eventId, title, users)
+  const result = await createEvent(
+    login_auth_token,
+    { id: eventId, title, users, isEmailsTriggered: false, createdOn: new Date() }
+  )
 
   if (result === 1) {
     res.json({
