@@ -100,6 +100,49 @@ module.exports = {
       })
     })
   },
+  
+  triggerEvent: async (token, id) => {
+    return new Promise((resolve, reject) => {
+      client.connect(async err => {
+        try {
+          const db = client.db(process.env.mongo_db_name)
+          const user = await db.collection("users").findOne({ token })
+          
+          // if no user is found for provided auth token
+          if (!user) {
+            client.close()
+            resolve(1)
+          }
+
+          const { email } = user
+
+          // insert new entry into events collection
+          const result = await db.collection("events")
+            .updateOne(
+              { creator: email, id },
+              { $set: { isEmailsTriggered: true } }
+            )
+
+          if (!result) {
+            resolve(2)
+          }
+
+          const { matchedCount, modifiedCount } = result || {}
+          if (!matchedCount) {
+            resolve(2)
+          }
+          if (!modifiedCount) {
+            resolve(3)
+          }
+
+          client.close()
+          resolve(result)
+        } catch (e) {
+          reject (e)
+        }
+      })
+    })
+  },
 
   showUsers: async (email, password) => {
     return new Promise((resolve, reject) => {
