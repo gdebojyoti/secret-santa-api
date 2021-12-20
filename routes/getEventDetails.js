@@ -47,7 +47,7 @@ const service = async (req, res) => {
     return
   }
 
-  const { _id, ...rest } = result
+  const { _id, mapping, ...rest } = result
 
   res.json({
     status: 0,

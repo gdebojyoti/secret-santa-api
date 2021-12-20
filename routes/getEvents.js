@@ -28,7 +28,7 @@ const service = async (req, res) => {
   res.json({
     status: 0,
     data: {
-      events: !result ? [] : result.map(({ _id, ...rest }) => ({...rest}))
+      events: !result ? [] : result.map(({ _id, mapping, ...rest }) => ({...rest}))
     }
   })
 }

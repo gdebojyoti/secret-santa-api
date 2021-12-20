@@ -2,6 +2,7 @@ const { createEvent } = require('../services/databaseOperations')
 const encrypt = require('../services/encrypt')
 const parseCookies = require('../services/parseCookies')
 const { emailValidator } = require('../services/validators')
+const mapUsers = require('../services/mapUsers')
 const { MINIMUM_USERS } = require('../config')
 
 const service = async (req, res) => {
@@ -57,11 +58,21 @@ const service = async (req, res) => {
     return
   }
 
+  // assign ids to users & generate mapping
+  const { indexedUsers, mapping } = mapUsers(users)
+
   // add data to database
   const eventId = encrypt(new Date() + Math.round(Math.random * 1000))
   const result = await createEvent(
     login_auth_token,
-    { id: eventId, title, users, isEmailsTriggered: false, createdOn: new Date() }
+    {
+      id: eventId,
+      title,
+      users: indexedUsers,
+      mapping,
+      isEmailsTriggered: false,
+      createdOn: new Date()
+    }
   )
 
   if (result === 1) {
@@ -76,9 +87,7 @@ const service = async (req, res) => {
   res.json({
     status: 0,
     message: 'event created successfully',
-    data: {
-      eventId
-    }
+    data: { eventId }
   })
 }
 
