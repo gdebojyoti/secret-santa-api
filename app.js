@@ -1,14 +1,22 @@
 require('dotenv').config({ path: '.env' })
 
 const express = require('express')
+const cors = require('cors')
 const app = express()
-const port = process.env.PORT || 8080
+const port = process.env.PORT || 31291
 
 // const sendEmail = require('./services/sendEmail')
 const routes = require('./routes')
 
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+
+app.use(cors({
+  "origin": "*",
+  "methods": "GET,HEAD,POST",
+  "preflightContinue": false,
+  "optionsSuccessStatus": 204
+}))
 
 app.get('/', (req,res) => {
   res.json({ message: 'I got in!' })
