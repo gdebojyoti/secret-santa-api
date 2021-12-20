@@ -68,7 +68,7 @@ const service = async (req, res) => {
     res.json({
       status: 1,
       message: 'logged in user could not be identified',
-      code: 403
+      code: 401
     })
     return
   }
