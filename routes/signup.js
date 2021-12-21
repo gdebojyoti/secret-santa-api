@@ -45,8 +45,8 @@ const service = (req, res) => {
   // TODO: handle db ops failure; catch error
   addUser(email, hash, token)
 
-  // add login_auth_token cookie after successful login
-  res.cookie('login_auth_token', token, { overwrite: true })
+  // add login_auth_token cookie after successful signup
+  res.cookie('login_auth_token', token, { overwrite: true, secure: true, sameSite: 'None' })
   
   res.json({
     status: 0,

@@ -45,6 +45,7 @@ const service = async (req, res) => {
 
   const { token } = userData
 
+  // add login_auth_token cookie after successful login
   res.cookie('login_auth_token', token, { overwrite: true, secure: true, sameSite: 'None' })
   res.json({
     status: 0,
