@@ -47,6 +47,8 @@ const service = async (req, res) => {
     return
   }
 
+  console.log("===== logging cookies inside create event", req.headers.cookie)
+
   // user should be logged in
   const { login_auth_token } = parseCookies(req.headers.cookie)
   if (!login_auth_token) {

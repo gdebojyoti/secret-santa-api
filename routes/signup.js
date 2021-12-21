@@ -46,7 +46,7 @@ const service = (req, res) => {
   addUser(email, hash, token)
 
   // add login_auth_token cookie after successful login
-  res.cookie('login_auth_token', token)
+  res.cookie('login_auth_token', token, { overwrite: true })
   
   res.json({
     status: 0,
